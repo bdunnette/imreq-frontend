@@ -1,0 +1,49 @@
+<div class="header">
+  <!--<ul class="nav nav-pills pull-right">
+    <li class="active"><a ng-href="#">Home</a></li>
+    <li><a ng-href="#">About</a></li>
+    <li><a ng-href="#">Contact</a></li>
+  </ul>-->
+  <h3 class="text-muted">LMP Imaging Requests</h3>
+</div>
+
+<h3>Current Requests:</h3>
+<div class="row">
+  <ul>
+      <li ng-repeat="r in requests | orderBy:updatedAt">{{r.specimenID}} - {{r.requestor}}</li>
+  </ul>
+</div>
+
+<!-- form code based on http://scotch.io/tutorials/javascript/submitting-ajax-forms-the-angularjs-way -->
+<!-- FORM -->
+<form ng-submit="processForm()">
+    <!-- NAME -->
+    <div id="name-group" class="form-group">
+        <label>Specimen ID</label>
+        <input type="text" name="specimenID" class="form-control" placeholder="U14-123" ng-model="formData.specimenID">
+        <span class="help-block"></span>
+    </div>
+
+    <!-- SUPERHERO NAME -->
+    <div id="superhero-group" class="form-group">
+        <label>Requestor</label>
+        <input type="email" name="requestor" class="form-control" placeholder="dunn0172@umn.edu" ng-model="formData.requestor">
+        <span class="help-block"></span>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <button type="submit" class="btn btn-success btn-lg btn-block">
+        <span class="glyphicon glyphicon-flash"></span> Submit!
+    </button>
+</form>
+
+<!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
+<pre>
+    {{ formData }}
+</pre>
+
+
+
+<div class="footer">
+  <p>♥ from the Yeoman team</p>
+</div>
