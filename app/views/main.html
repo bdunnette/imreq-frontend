@@ -9,9 +9,7 @@
 
 <h3>Current Requests:</h3>
 <div class="row">
-  <ul>
-      <li ng-repeat="r in requests | orderBy:updatedAt">{{r.specimenID}} - {{r.requestor}}</li>
-  </ul>
+  <div class="gridStyle" ng-grid="gridOptions"></div>
 </div>
 
 <!-- form code based on http://scotch.io/tutorials/javascript/submitting-ajax-forms-the-angularjs-way -->

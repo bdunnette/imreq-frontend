@@ -9,6 +9,8 @@ angular.module('imreqFrontendApp')
         $scope.requests = requests;
     });
     
+    $scope.gridOptions = { data: 'requests' };
+      
     $scope.processForm = function () {
         var newRequest = new ImageRequest($scope.formData);
         newRequest.$save();

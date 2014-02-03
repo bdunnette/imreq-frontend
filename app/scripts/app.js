@@ -4,7 +4,8 @@ angular.module('imreqFrontendApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngGrid'
 ])
   .config(function ($routeProvider) {
     $routeProvider
