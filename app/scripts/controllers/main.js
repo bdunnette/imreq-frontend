@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('imreqFrontendApp')
-  .controller('MainCtrl', function ($scope, $resource) {
+  .controller('MainCtrl', function ($scope, $resource, $http) {
     $scope.formData = {};
     var ImageRequest = $resource('http://160.94.51.184:1337/imagingrequest/:requestId');
     //var ImageRequest = $resource('http://127.0.0.1:1337/imagingrequest/:requestId');
@@ -16,7 +16,7 @@ angular.module('imreqFrontendApp')
             {field:'specimenID', displayName:'Specimen ID'},
             {field:'modality', displayName:'Imaging Type'},
             {field:'requestor', displayName:'Requestor', width:'**'},
-            {field:'status', displayName:'Status', cellTemplate: '<div ng-class="{green: row.getProperty(col.field) == \'uploaded\'}"><div class="ngCellText">{{row.getProperty(col.field)}}</div></div>'},
+            {field:'status', displayName:'Status', cellTemplate: '<div ng-class="{green: row.getProperty(col.field) == \'uploaded\'}" ng-click=markUploaded(row)><div class="ngCellText">{{row.getProperty(col.field)}}^^</div></div>'},
             {field:'updatedAt', displayName:'Last Updated', width:'**'},
             {field:'delete', displayName:'Delete', cellTemplate: '<div ng-click=removeRequest(row)><span class="glyphicon glyphicon-remove-circle"></span></div>'}
         ],
@@ -35,5 +35,10 @@ angular.module('imreqFrontendApp')
         $resource('http://160.94.51.184:1337/imagingrequest/' + row.entity.id).delete(function (response) {
             $scope.requests.splice(index, 1);
         });
+    };
+	
+	$scope.markUploaded = function(row) {
+		$http.put('http://160.94.51.184:1337/imagingrequest/' + row.entity.id, {"status": "uploaded"})
+			.success(function() {row.entity.status = "uploaded";});
     };
   });
